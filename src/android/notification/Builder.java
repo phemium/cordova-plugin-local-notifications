@@ -100,6 +100,7 @@ public class Builder {
         return this;
     }
 
+
     /**
      * Set click activity.
      *
@@ -117,7 +118,6 @@ public class Builder {
     public Notification build() {
         Uri sound     = options.getSoundUri();
         int smallIcon = options.getSmallIcon();
-        int ledColor  = options.getLedColor();
         NotificationCompat.Builder builder;
 
         builder = new NotificationCompat.Builder(context)
@@ -125,21 +125,19 @@ public class Builder {
                 .setContentTitle(options.getTitle())
                 .setContentText(options.getText())
                 .setNumber(options.getBadgeNumber())
+                .setPriority(options.getPriority())
                 .setTicker(options.getText())
                 .setAutoCancel(options.isAutoClear())
                 .setOngoing(options.isOngoing())
-                .setColor(options.getColor());
-
-        if (ledColor != 0) {
-            builder.setLights(ledColor, options.getLedOnTime(), options.getLedOffTime());
-        }
+                .setColor(options.getColor())
+                .setLights(options.getLedColor(), 100, 100);
 
         if (sound != null) {
             builder.setSound(sound);
         }
 
         if (smallIcon == 0) {
-            builder.setSmallIcon(options.getIcon());
+            builder.setSmallIcon(context.getApplicationInfo().icon);
         } else {
             builder.setSmallIcon(options.getSmallIcon());
             builder.setLargeIcon(options.getIconBitmap());
