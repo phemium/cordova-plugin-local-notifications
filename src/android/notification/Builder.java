@@ -117,18 +117,16 @@ public class Builder {
     public Notification build() {
         Uri sound     = options.getSoundUri();
         int smallIcon = options.getSmallIcon();
-        Notification.Builder builder;
+        android.app.Notification.Builder builder;
 
-        builder = new Notification.Builder(context)
+        builder = new android.app.Notification.Builder(context)
                 .setDefaults(0)
                 .setContentTitle(options.getTitle())
                 .setContentText(options.getText())
                 .setNumber(options.getBadgeNumber())
-                .setPriority(options.getPriority())
                 .setTicker(options.getText())
                 .setAutoCancel(options.isAutoClear())
                 .setOngoing(options.isOngoing())
-                .setColor(options.getColor())
                 .setLights(options.getLedColor(), 100, 100);
 
         if (sound != null) {
@@ -155,7 +153,7 @@ public class Builder {
      * @param builder
      *      Local notification builder instance
      */
-    private void applyDeleteReceiver(Notification.Builder builder) {
+    private void applyDeleteReceiver(android.app.Notification.Builder builder) {
 
         if (clearReceiver == null)
             return;
@@ -177,7 +175,7 @@ public class Builder {
      * @param builder
      *      Local notification builder instance
      */
-    private void applyContentReceiver(Notification.Builder builder) {
+    private void applyContentReceiver(android.app.Notification.Builder builder) {
 
         if (clickActivity == null)
             return;

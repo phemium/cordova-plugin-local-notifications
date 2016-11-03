@@ -61,7 +61,7 @@ public class Notification {
     private final Options options;
 
     // Builder with full configuration
-    private final Notification.Builder builder;
+    private final android.app.Notification.Builder builder;
 
     // Receiver to handle the trigger event
     private Class<?> receiver = defaultReceiver;
@@ -77,7 +77,7 @@ public class Notification {
      *      Pre-configured notification builder
      */
     protected Notification (Context context, Options options,
-                    Notification.Builder builder, Class<?> receiver) {
+                            android.app.Notification.Builder builder, Class<?> receiver) {
 
         this.context = context;
         this.options = options;

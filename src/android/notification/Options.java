@@ -250,7 +250,7 @@ public class Options {
         String hex = options.optString("led", null);
 
         if (hex == null) {
-            return Notification.DEFAULT_LIGHTS;
+            return android.app.Notification.DEFAULT_LIGHTS;
         }
 
         int aRGB = Integer.parseInt(hex, 16);
@@ -267,7 +267,7 @@ public class Options {
         String hex = options.optString("color", null);
 
         if (hex == null) {
-            return Notification.COLOR_DEFAULT;
+            return android.app.Notification.COLOR_DEFAULT;
         }
 
         int aRGB = Integer.parseInt(hex, 16);
