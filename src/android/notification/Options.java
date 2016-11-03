@@ -27,7 +27,6 @@ import android.app.AlarmManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.support.v4.app.NotificationCompat;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -251,7 +250,7 @@ public class Options {
         String hex = options.optString("led", null);
 
         if (hex == null) {
-            return NotificationCompat.DEFAULT_LIGHTS;
+            return Notification.DEFAULT_LIGHTS;
         }
 
         int aRGB = Integer.parseInt(hex, 16);
@@ -268,7 +267,7 @@ public class Options {
         String hex = options.optString("color", null);
 
         if (hex == null) {
-            return NotificationCompat.COLOR_DEFAULT;
+            return Notification.COLOR_DEFAULT;
         }
 
         int aRGB = Integer.parseInt(hex, 16);

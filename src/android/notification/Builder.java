@@ -27,7 +27,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.NotificationCompat;
 
 import org.json.JSONObject;
 
@@ -118,9 +117,9 @@ public class Builder {
     public Notification build() {
         Uri sound     = options.getSoundUri();
         int smallIcon = options.getSmallIcon();
-        NotificationCompat.Builder builder;
+        Notification.Builder builder;
 
-        builder = new NotificationCompat.Builder(context)
+        builder = new Notification.Builder(context)
                 .setDefaults(0)
                 .setContentTitle(options.getTitle())
                 .setContentText(options.getText())
@@ -156,7 +155,7 @@ public class Builder {
      * @param builder
      *      Local notification builder instance
      */
-    private void applyDeleteReceiver(NotificationCompat.Builder builder) {
+    private void applyDeleteReceiver(Notification.Builder builder) {
 
         if (clearReceiver == null)
             return;
@@ -178,7 +177,7 @@ public class Builder {
      * @param builder
      *      Local notification builder instance
      */
-    private void applyContentReceiver(NotificationCompat.Builder builder) {
+    private void applyContentReceiver(Notification.Builder builder) {
 
         if (clickActivity == null)
             return;
