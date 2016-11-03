@@ -27,7 +27,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.NotificationCompat;
 
 import org.json.JSONObject;
 
@@ -100,6 +99,7 @@ public class Builder {
         return this;
     }
 
+
     /**
      * Set click activity.
      *
@@ -117,29 +117,26 @@ public class Builder {
     public Notification build() {
         Uri sound     = options.getSoundUri();
         int smallIcon = options.getSmallIcon();
-        int ledColor  = options.getLedColor();
-        NotificationCompat.Builder builder;
+        Notification.Builder builder;
 
-        builder = new NotificationCompat.Builder(context)
+        builder = new Notification.Builder(context)
                 .setDefaults(0)
                 .setContentTitle(options.getTitle())
                 .setContentText(options.getText())
                 .setNumber(options.getBadgeNumber())
+                .setPriority(options.getPriority())
                 .setTicker(options.getText())
                 .setAutoCancel(options.isAutoClear())
                 .setOngoing(options.isOngoing())
-                .setColor(options.getColor());
-
-        if (ledColor != 0) {
-            builder.setLights(ledColor, options.getLedOnTime(), options.getLedOffTime());
-        }
+                .setColor(options.getColor())
+                .setLights(options.getLedColor(), 100, 100);
 
         if (sound != null) {
             builder.setSound(sound);
         }
 
         if (smallIcon == 0) {
-            builder.setSmallIcon(options.getIcon());
+            builder.setSmallIcon(context.getApplicationInfo().icon);
         } else {
             builder.setSmallIcon(options.getSmallIcon());
             builder.setLargeIcon(options.getIconBitmap());
@@ -158,7 +155,7 @@ public class Builder {
      * @param builder
      *      Local notification builder instance
      */
-    private void applyDeleteReceiver(NotificationCompat.Builder builder) {
+    private void applyDeleteReceiver(Notification.Builder builder) {
 
         if (clearReceiver == null)
             return;
@@ -180,7 +177,7 @@ public class Builder {
      * @param builder
      *      Local notification builder instance
      */
-    private void applyContentReceiver(NotificationCompat.Builder builder) {
+    private void applyContentReceiver(Notification.Builder builder) {
 
         if (clickActivity == null)
             return;

@@ -31,7 +31,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,7 +61,7 @@ public class Notification {
     private final Options options;
 
     // Builder with full configuration
-    private final NotificationCompat.Builder builder;
+    private final Notification.Builder builder;
 
     // Receiver to handle the trigger event
     private Class<?> receiver = defaultReceiver;
@@ -78,7 +77,7 @@ public class Notification {
      *      Pre-configured notification builder
      */
     protected Notification (Context context, Options options,
-                    NotificationCompat.Builder builder, Class<?> receiver) {
+                    Notification.Builder builder, Class<?> receiver) {
 
         this.context = context;
         this.options = options;

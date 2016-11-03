@@ -1,3 +1,4 @@
+
 /*
  * Copyright (c) 2013-2015 by appPlant UG. All rights reserved.
  *
@@ -67,10 +68,10 @@ exports.applyPlatformSpecificOptions = function () {
         defaults.smallIcon = undefined;
         defaults.ongoing   = false;
         defaults.autoClear = true;
-        defaults.led       = undefined;
-        defaults.ledOnTime = undefined;
-        defaults.ledOffTime = undefined;
+        defaults.led       = 'FF0000';
         defaults.color     = undefined;
+        defaults.priority  = 0;
+        defaults.visibility  = 0;
         break;
     }
 

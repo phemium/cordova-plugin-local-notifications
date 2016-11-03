@@ -27,7 +27,6 @@ import android.app.AlarmManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.support.v4.app.NotificationCompat;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -132,7 +131,7 @@ public class Options {
         if (options.has("iconUri") && !options.optBoolean("updated"))
             return;
 
-        Uri iconUri  = assets.parse(options.optString("icon", "res://icon"));
+        Uri iconUri  = assets.parse(options.optString("icon", "icon"));
         Uri soundUri = assets.parseSound(options.optString("sound", null));
 
         try {
@@ -177,6 +176,15 @@ public class Options {
     public int getBadgeNumber() {
         return options.optInt("badge", 0);
     }
+
+
+    /**
+     * Priority for the local notification.
+     */
+    public int getPriority() {
+        return options.optInt("priority", 0);
+    }
+
 
     /**
      * ongoing flag for local notifications.
@@ -242,48 +250,12 @@ public class Options {
         String hex = options.optString("led", null);
 
         if (hex == null) {
-            return 0;
+            return Notification.DEFAULT_LIGHTS;
         }
 
         int aRGB = Integer.parseInt(hex, 16);
 
         return aRGB + 0xFF000000;
-    }
-
-    /**
-     * @return
-     *      The time that the LED should be on (in milliseconds).
-     */
-    public int getLedOnTime() {
-        String timeOn = options.optString("ledOnTime", null);
-
-        if (timeOn == null) {
-            return 1000;
-        }
-
-        try {
-            return Integer.parseInt(timeOn);
-        } catch (NumberFormatException e) {
-           return 1000;
-        }
-    }
-
-    /**
-     * @return
-     *      The time that the LED should be off (in milliseconds).
-     */
-    public int getLedOffTime() {
-        String timeOff = options.optString("ledOffTime", null);
-
-        if (timeOff == null) {
-            return 1000;
-        }
-
-        try {
-            return Integer.parseInt(timeOff);
-        } catch (NumberFormatException e) {
-           return 1000;
-        }
     }
 
     /**
@@ -295,7 +267,7 @@ public class Options {
         String hex = options.optString("color", null);
 
         if (hex == null) {
-            return NotificationCompat.COLOR_DEFAULT;
+            return Notification.COLOR_DEFAULT;
         }
 
         int aRGB = Integer.parseInt(hex, 16);
